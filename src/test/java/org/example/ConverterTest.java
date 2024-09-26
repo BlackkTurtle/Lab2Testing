@@ -19,6 +19,42 @@ class ConverterTest {
     }
 
     @Test
+    void whenRomanIsEmpty_ThenThrowException() {
+        Exception e = Assertions.assertThrows(Exception.class, () -> {
+            converter.romanToDecimal(new String());
+        });
+        Assertions.assertSame(IllegalArgumentException.class, e.getClass());
+        Assertions.assertEquals("Roman can not be Empty", e.getMessage());
+    }
+
+    @Test
+    void whenRomanHaveNonLatinLetters_ThenThrowException() {
+        Exception e = Assertions.assertThrows(Exception.class, () -> {
+            converter.romanToDecimal("VIIІ");
+        });
+        Assertions.assertSame(IllegalArgumentException.class, e.getClass());
+        Assertions.assertEquals("Roman should consist only of latin upper case letters", e.getMessage());
+    }
+
+    @Test
+    void whenRomanHaveDigits_ThenThrowException() {
+        Exception e = Assertions.assertThrows(Exception.class, () -> {
+            converter.romanToDecimal("V1I");
+        });
+        Assertions.assertSame(IllegalArgumentException.class, e.getClass());
+        Assertions.assertEquals("Roman should consist only of latin upper case letters", e.getMessage());
+    }
+
+    @Test
+    void whenRomanHasSpace_ThenThrowException() {
+        Exception e = Assertions.assertThrows(Exception.class, () -> {
+            converter.romanToDecimal("XII I");
+        });
+        Assertions.assertSame(IllegalArgumentException.class, e.getClass());
+        Assertions.assertEquals("Roman can not have spaces", e.getMessage());
+    }
+
+    @Test
     void whenRomanIsNull_ThenThrowException() {
         Exception e = Assertions.assertThrows(Exception.class, () -> {
             converter.romanToDecimal(null);
@@ -33,7 +69,7 @@ class ConverterTest {
             converter.romanToDecimal("xviii");
         });
         Assertions.assertSame(IllegalArgumentException.class, e.getClass());
-        Assertions.assertEquals("Invalid roman numeral", e.getMessage());
+        Assertions.assertEquals("Roman should consist only of latin upper case letters", e.getMessage());
     }
 
     @Test

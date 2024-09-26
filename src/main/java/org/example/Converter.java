@@ -35,6 +35,18 @@ public class Converter {
             throw new IllegalArgumentException("Roman can not be null");
         }
 
+        if (str.isEmpty()){
+            throw new IllegalArgumentException("Roman can not be Empty");
+        }
+
+        if (str.contains(" ")){
+            throw new IllegalArgumentException("Roman can not have spaces");
+        }
+
+        if (!str.matches("[A-Z]+")){
+            throw new IllegalArgumentException("Roman should consist only of latin upper case letters");
+        }
+
         if(!ValidationOfRomanNumerals(str))
         {
             throw new IllegalArgumentException("Invalid roman numeral");
